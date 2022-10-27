@@ -1,7 +1,9 @@
 package at.moritzfamira.weighttracker
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -11,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import at.moritzfamira.weighttracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,22 +34,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.fab.setOnClickListener() {
-            navController.navigate(R.id.addWeight)
-            binding.fab.hide()
+            if (navController.currentDestination?.id == R.id.listWeights) {
+                //println("INLISTWEIGHTS")
+                // better than before but not perfect solution
+                navController.navigate(R.id.addWeight)
+            }
         }
     }
 
-    override fun onStart() {
-        binding.fab.show()
-        super.onStart()
-
-    }
-
-    override fun onBackPressed() {
-        // very inelegant solution
-        binding.fab.show()
-        super.onBackPressed()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,7 +61,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        binding.fab.show()
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
