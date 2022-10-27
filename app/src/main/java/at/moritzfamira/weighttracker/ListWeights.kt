@@ -18,6 +18,7 @@ import java.util.*
 class ListWeights : Fragment() {
 
     private var _binding: ListWeightsBinding? = null
+    private lateinit var mWeightListAdapter: WeightListAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,13 +44,18 @@ class ListWeights : Fragment() {
             val weightDao = db.weightDao()
             val weights = weightDao.getAll()
             println(weights.toString())
-            // @TODO insert into list
+
+            // @TODO insert into list/ create ViewHolder
+            //mWeightListAdapter.createViewHolder()
+
+            binding.weightList.adapter
         }.start()
 
         super.onStart()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
     }
 
