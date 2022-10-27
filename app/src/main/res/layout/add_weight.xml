@@ -11,6 +11,7 @@
         android:id="@+id/current_date_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
         android:text="date"
         tools:layout_editor_absoluteX="287dp"
         tools:layout_editor_absoluteY="116dp" />
@@ -24,6 +25,7 @@
             android:id="@+id/addWeightTextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
             android:ems="10"
             android:hint="Enter new weight:"
             android:inputType="numberDecimal"
@@ -34,7 +36,7 @@
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Weight"
+            android:text="@string/add_weight"
             app:icon="@android:drawable/ic_input_add"
             tools:layout_editor_absoluteX="288dp"
             tools:layout_editor_absoluteY="126dp" />
