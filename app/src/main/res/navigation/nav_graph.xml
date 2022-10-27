@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="Enter Weight"
+    app:startDestination="@id/listWeights">
+    <fragment
+        android:id="@+id/listWeights"
+        android:name="at.moritzfamira.weighttracker.ListWeights"
+        android:label="Enter Weight"
+        tools:layout="@layout/list_weights" >
+        <action
+            android:id="@+id/action_listWeights_to_addWeight2"
+            app:destination="@id/addWeight" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWeight"
+        android:name="at.moritzfamira.weighttracker.AddWeight"
+        android:label="Add Weight"
+        tools:layout="@layout/add_weight" >
+        <action
+            android:id="@+id/action_addWeight_to_listWeights2"
+            app:destination="@id/listWeights"
+            app:popUpTo="@id/listWeights" />
+    </fragment>
+</navigation>
