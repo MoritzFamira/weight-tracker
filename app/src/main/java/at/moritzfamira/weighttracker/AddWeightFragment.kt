@@ -1,25 +1,22 @@
 package at.moritzfamira.weighttracker
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import at.moritzfamira.weighttracker.databinding.AddWeightBinding
-import at.moritzfamira.weighttracker.datamodel.AppDatabase
-import at.moritzfamira.weighttracker.datamodel.Weight
+import at.moritzfamira.weighttracker.model.AppDatabase
+import at.moritzfamira.weighttracker.model.Weight
 import java.time.Instant
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 
 
-class AddWeight : Fragment() {
+class AddWeightFragment : Fragment() {
     private var _binding: AddWeightBinding? = null
 
     // This property is only valid between onCreateView and
@@ -52,9 +49,10 @@ class AddWeight : Fragment() {
                 val db = Room.databaseBuilder(
                     requireContext(),
                     AppDatabase::class.java, "database-name"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 val weightDao = db.weightDao()
-                weightDao.insert(Weight(Date.from(Instant.now()),binding.addWeightTextField.text.toString().toLong()))
+                // shit way of converting to long
+                weightDao.insert(Weight(Date.from(Instant.now()),binding.addWeightTextField.text.toString().toDouble()))
             }.start()
 
             val navController = findNavController()

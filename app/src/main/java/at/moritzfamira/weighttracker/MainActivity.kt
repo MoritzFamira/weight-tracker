@@ -1,10 +1,6 @@
 package at.moritzfamira.weighttracker
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -13,10 +9,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.room.Room
+import androidx.recyclerview.widget.RecyclerView
+import at.moritzfamira.weighttracker.adapter.WeightAdapter
+import at.moritzfamira.weighttracker.data.Datasource
 import at.moritzfamira.weighttracker.databinding.ActivityMainBinding
-import at.moritzfamira.weighttracker.datamodel.AppDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,8 +39,30 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.addWeight)
             }
         }
+        Thread {
+            val weightDataSet = Datasource().loadWeights(this)
+            val recyclerView = findViewById<RecyclerView>(R.id.weightList)
+            recyclerView.adapter = WeightAdapter(this,weightDataSet)
+            recyclerView.setHasFixedSize(true)
+        }.start()
+        println("onCreate")
     }
 
+    override fun onPause() {
+        println("onPause")
+        super.onPause()
+    }
+
+    override fun onRestart() {
+        println("onRestart")
+        super.onRestart()
+    }
+
+    public override fun onResume() {
+        println("onResume")
+
+        super.onResume()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
