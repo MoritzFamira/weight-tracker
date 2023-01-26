@@ -1,4 +1,4 @@
-package at.moritzfamira.weighttracker.datamodel
+package at.moritzfamira.weighttracker.model
 
 import androidx.room.Dao
 import androidx.room.Delete
