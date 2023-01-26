@@ -7,21 +7,19 @@
     app:startDestination="@id/listWeights">
     <fragment
         android:id="@+id/listWeights"
-        android:name="at.moritzfamira.weighttracker.ListWeights"
-        android:label="Enter Weight"
-        tools:layout="@layout/list_weights" >
+        android:name="at.moritzfamira.weighttracker.ListWeightsFragment"
+        android:label="ListWeights" >
         <action
-            android:id="@+id/action_listWeights_to_addWeight2"
+            android:id="@+id/action_listWeights_to_addWeight"
             app:destination="@id/addWeight" />
     </fragment>
     <fragment
         android:id="@+id/addWeight"
-        android:name="at.moritzfamira.weighttracker.AddWeight"
-        android:label="Add Weight"
+        android:name="at.moritzfamira.weighttracker.AddWeightFragment"
+        android:label="add_weight"
         tools:layout="@layout/add_weight" >
         <action
-            android:id="@+id/action_addWeight_to_listWeights2"
-            app:destination="@id/listWeights"
-            app:popUpTo="@id/listWeights" />
+            android:id="@+id/action_addWeight_to_listWeights"
+            app:destination="@id/listWeights" />
     </fragment>
 </navigation>
