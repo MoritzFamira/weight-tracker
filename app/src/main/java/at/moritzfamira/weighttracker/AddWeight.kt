@@ -15,6 +15,7 @@ import at.moritzfamira.weighttracker.datamodel.AppDatabase
 import at.moritzfamira.weighttracker.datamodel.Weight
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
 
@@ -54,7 +55,7 @@ class AddWeight : Fragment() {
                     AppDatabase::class.java, "database-name"
                 ).build()
                 val weightDao = db.weightDao()
-                weightDao.insert(Weight(Date.from(Instant.now()),binding.addWeightTextField.text.toString().toDouble()))
+                weightDao.insert(Weight(LocalDateTime.now(),binding.addWeightTextField.text.toString().toDouble()))
             }.start()
 
             val navController = findNavController()
