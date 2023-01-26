@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface WeightDao {
-    @Query("Select * from weight")
+    @Query("select * from w_weights")
     fun getAll(): List<Weight>
     @Insert
     fun insert(weight:Weight)

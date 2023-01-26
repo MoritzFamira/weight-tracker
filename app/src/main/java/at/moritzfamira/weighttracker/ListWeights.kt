@@ -1,16 +1,15 @@
 package at.moritzfamira.weighttracker
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.room.Room
 import at.moritzfamira.weighttracker.databinding.ListWeightsBinding
 import at.moritzfamira.weighttracker.datamodel.AppDatabase
-import at.moritzfamira.weighttracker.datamodel.Weight
-import java.time.Instant
 import java.util.*
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -18,7 +17,7 @@ import java.util.*
 class ListWeights : Fragment() {
 
     private var _binding: ListWeightsBinding? = null
-    private lateinit var mWeightListAdapter: WeightListAdapter
+    private lateinit var weightListAdapter: WeightListAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -42,13 +41,13 @@ class ListWeights : Fragment() {
             ).build()
 
             val weightDao = db.weightDao()
+            db.close()
             val weights = weightDao.getAll()
-            println(weights.toString())
+            println(weights)
 
-            // @TODO insert into list/ create ViewHolder
-            //mWeightListAdapter.createViewHolder()
-
-            binding.weightList.adapter
+            weightListAdapter = WeightListAdapter(weights)
+            activity?.runOnUiThread { binding.weightList.adapter = weightListAdapter }
+            R.id.weightListItem
         }.start()
 
         super.onStart()

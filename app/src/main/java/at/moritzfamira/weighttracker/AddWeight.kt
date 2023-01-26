@@ -54,7 +54,7 @@ class AddWeight : Fragment() {
                     AppDatabase::class.java, "database-name"
                 ).build()
                 val weightDao = db.weightDao()
-                weightDao.insert(Weight(Date.from(Instant.now()),binding.addWeightTextField.text.toString().toLong()))
+                weightDao.insert(Weight(Date.from(Instant.now()),binding.addWeightTextField.text.toString().toDouble()))
             }.start()
 
             val navController = findNavController()

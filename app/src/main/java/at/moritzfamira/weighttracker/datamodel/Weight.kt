@@ -5,8 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity(primaryKeys = ["dateOfWeight","value"])
+@Entity(primaryKeys = ["w_date","w_value"], tableName = "w_weights")
 data class Weight(
-    @ColumnInfo val dateOfWeight: Date,
-    @ColumnInfo val value: Long
+    @ColumnInfo(name = "w_date")
+    val dateOfWeight: Date,
+    @ColumnInfo(name = "w_value")
+    val value: Double
 )
