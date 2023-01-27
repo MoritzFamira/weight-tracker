@@ -42,12 +42,11 @@ class ListWeights : Fragment() {
 
             val weightDao = db.weightDao()
             db.close()
-            val weights = weightDao.getAll()
+            val weights = weightDao.getNewestFirst()
             println(weights)
 
             weightListAdapter = WeightListAdapter(weights)
             activity?.runOnUiThread { binding.weightList.adapter = weightListAdapter }
-            R.id.weightListItem
         }.start()
 
         super.onStart()

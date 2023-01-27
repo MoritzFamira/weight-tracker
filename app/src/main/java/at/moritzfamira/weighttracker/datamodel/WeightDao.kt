@@ -9,6 +9,8 @@ import androidx.room.Query
 interface WeightDao {
     @Query("select * from w_weights")
     fun getAll(): List<Weight>
+    @Query("select * from w_weights order by w_date desc")
+    fun getNewestFirst(): List<Weight>
     @Insert
     fun insert(weight:Weight)
     @Delete

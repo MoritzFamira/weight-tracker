@@ -36,6 +36,9 @@ class WeightListAdapter(private val dataSet: List<Weight>) :
         viewHolder.binding.weightValue.text = dataSet[position].value.toString() +" kg"
         var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         viewHolder.binding.weightDate.text = dataSet[position].dateOfWeight.format(formatter)
+        viewHolder.binding.deleteWeight.setOnClickListener() {
+            println(viewHolder.binding.weightValue.text.toString())
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
