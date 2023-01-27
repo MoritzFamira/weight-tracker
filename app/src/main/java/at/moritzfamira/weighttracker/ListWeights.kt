@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.room.Room
 import at.moritzfamira.weighttracker.databinding.ListWeightsBinding
 import at.moritzfamira.weighttracker.datamodel.AppDatabase
+import at.moritzfamira.weighttracker.datamodel.Weight
+import kotlinx.coroutines.awaitAll
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -44,8 +47,8 @@ class ListWeights : Fragment() {
             db.close()
             val weights = weightDao.getNewestFirst()
             println(weights)
-
-            weightListAdapter = WeightListAdapter(weights)
+            // casting to ArrayList possibly not the most elegant solution
+            weightListAdapter = WeightListAdapter(weights as ArrayList<Weight>)
             activity?.runOnUiThread { binding.weightList.adapter = weightListAdapter }
         }.start()
 

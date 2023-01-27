@@ -59,6 +59,7 @@ class AddWeight : Fragment() {
                     val weightDao = db.weightDao()
                     weightDao.insert(
                         Weight(
+                            null,
                             LocalDateTime.now(),
                             binding.addWeightTextField.text.toString().toDouble()
                         )

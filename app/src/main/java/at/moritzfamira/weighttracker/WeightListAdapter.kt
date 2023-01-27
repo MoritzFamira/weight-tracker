@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import at.moritzfamira.weighttracker.databinding.WeightListItemBinding
+import at.moritzfamira.weighttracker.datamodel.AppDatabase
 import at.moritzfamira.weighttracker.datamodel.Weight
 import java.time.format.DateTimeFormatter
 
 
-class WeightListAdapter(private val dataSet: List<Weight>) :
+class WeightListAdapter(private val dataSet: ArrayList<Weight>) :
     RecyclerView.Adapter<WeightListAdapter.ViewHolder>() {
 
     /**
@@ -36,8 +38,24 @@ class WeightListAdapter(private val dataSet: List<Weight>) :
         viewHolder.binding.weightValue.text = dataSet[position].value.toString() +" kg"
         var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         viewHolder.binding.weightDate.text = dataSet[position].dateOfWeight.format(formatter)
-        viewHolder.binding.deleteWeight.setOnClickListener() {
-            println(viewHolder.binding.weightValue.text.toString())
+        viewHolder.binding.weightListItem.tag = dataSet[position].weightId
+        viewHolder.binding.deleteWeight.setOnClickListener {
+            //println(viewHolder.binding.weightValue.text.toString())
+            //TODO fix incorrect data being deleted from time to time
+            println(dataSet[position])
+            println(dataSet.toString())
+            dataSet.removeAt(position)
+            notifyItemRemoved(position)
+            Thread {
+                val db = Room.databaseBuilder(
+                    viewHolder.itemView.context,
+                    AppDatabase::class.java, "database-name"
+                ).build()
+
+                val weightDao = db.weightDao()
+                weightDao.deleteById(viewHolder.binding.weightListItem.tag as Int)
+                db.close()
+            }.start()
         }
     }
 

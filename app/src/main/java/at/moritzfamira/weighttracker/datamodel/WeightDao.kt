@@ -15,4 +15,6 @@ interface WeightDao {
     fun insert(weight:Weight)
     @Delete
     fun delete(weight: Weight)
+    @Query("delete from w_weights where w_id = :id")
+    fun deleteById(id: Int)
 }
